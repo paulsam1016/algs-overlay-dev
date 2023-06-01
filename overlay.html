@@ -1,0 +1,47 @@
+<link href="./src/marquee.css" type="text/css" rel="stylesheet" />
+<link href="./src/style.css" type="text/css" rel="stylesheet">
+
+<div class="content">
+      <div class="simple-marquee-container">
+            <div id="marquee-sibling" class="marquee-sibling">
+                  Placeholder
+            </div>
+            <div class="marquee">
+                  <ul class="marquee-content-items">
+                        <li>Placeholder</li>
+                        <li>Placeholder</li>
+                        <li>Placeholder</li>
+                        <li>Placeholder</li>
+                        <li>Placeholder</li>
+                  </ul>
+            </div>
+      </div>
+</div>
+
+<script src="./src/main.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="./src/marquee.js"></script>
+<script>
+      $(function () {
+            let options = {
+                  autostart: true,
+                  padding: 0,
+                  duration: 10000,
+                  marquee_class: '.marquee',
+                  container_class: '.simple-marquee-container',
+                  sibling_class: '.marquee-sibling',
+                  hover: false,
+                  velocity: 0.1,
+                  direction: 'left'
+            }
+            getALGSData().then(() => {
+                  $('.simple-marquee-container').SimpleMarquee(options);
+            });
+            const interval = setInterval(function () {
+                  getALGSData().then(() => {
+                        $('.simple-marquee-container').SimpleMarquee(options);
+                  });
+            }, 10000);
+            // $('.simple-marquee-container').SimpleMarquee();
+      });
+</script>
