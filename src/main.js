@@ -53,12 +53,18 @@ function processRequest(responseText) {
                 var team = getTeam(shortName);
             }
 
-            if (team && config['showLogo']) {
+            if (config['showLogo']) {
                 var innerImg = document.createElement('img');
                 innerImg.className = 'item-img';
-                innerImg.src = team.path;
+                if (team) {
+                    innerImg.src = team.path;
+                }
+                else {
+                    innerImg.src = "src/images/0.png"
+                }
                 innerli.appendChild(innerImg);
             }
+
             var innerText = document.createElement('div');
             innerText.className = 'item-text';
             if (team && config['isFullName']) {
@@ -67,14 +73,14 @@ function processRequest(responseText) {
             else {
                 innerText.innerHTML = match;
             }
-            if (team && config['showLogo']) {
+
+            if (config['showLogo']) {
                 innerText.style = 'left: 66px;';    // 40 logo width + 20 margin + 6 padding
             }
-
             innerli.appendChild(innerText);
             contentElements[j].appendChild(innerli);
             var extraWidth = innerText.offsetWidth + 48;    // 48 padding
-            if (team && config['showLogo']) {
+            if (config['showLogo']) {
                 extraWidth = extraWidth + 40; // 40 logo width
             }
             innerli.style.width = extraWidth + 'px';
