@@ -7,7 +7,7 @@
 
 .simple-marquee-container {
 	width: 100%;
-	background: white;
+	/* background: white; */
 	float: left;
 	display: inline-block;
 	overflow: hidden;
@@ -17,7 +17,6 @@
 }
 
 .simple-marquee-container .marquee-sibling {
-	background: red;
 	width: auto;
 	height: 45px;
 	padding: 0 1em;
@@ -25,7 +24,26 @@
 	text-align: center;
 	float: left;
 	left: 0;
-	z-index: 2000;
+	z-index: 1;
+	overflow: hidden;
+}
+
+.simple-marquee-container .marquee-sibling .marquee-sibling-cover {
+	height: 45px;
+	margin: 0 0 0 -30px;
+	transform: skew(-25deg);
+	background: black;
+	overflow: hidden;
+	position: relative;
+	z-index: 2;
+}
+
+.simple-marquee-container .marquee-sibling .marquee-sibling-text {
+	color: white;
+	position: absolute;
+	transform: skew(25deg);
+	left: 30px;
+	z-index: 3;
 }
 
 .simple-marquee-container .marquee,
@@ -33,6 +51,7 @@
 	display: inline-block;
 	white-space: nowrap;
 	position: absolute;
+	overflow: visible;
 }
 
 .simple-marquee-container .marquee {
@@ -41,21 +60,45 @@
 
 .simple-marquee-container .marquee-content-items {
 	display: inline-block;
-	margin: 0;
 	height: 45px;
 	position: relative;
+	background: white;
+}
+
+.simple-marquee-container .marquee-content-items::after {
+	background-image: url(./nicewigg.png);
+	background-size: 45px 45px;
+	display: inline-block;
+	width: 45px;
+	height: 45px;
+	margin: 0 10px;
+	content: "";
 }
 
 .simple-marquee-container .marquee-content-items li {
-	background: red;
 	display: inline-block;
-	padding: 0 1em;
 	line-height: 45px;
-	color: white;
-	margin: 0 1em;
+	color: #c00000;
+	height: 45px;
+	transform: skew(-25deg);
+	background: black;
+	overflow: hidden;
+	position: relative;
+	padding-top: 2px;
 }
 
-.simple-marquee-container .marquee-content-items li:after {
-	color: white;
-	margin: 0 1em;
+.item-text {
+	display: inline-block;
+	position: absolute;
+	transform: skew(25deg);
+	left: 30px;
+}
+
+.item-img {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin: 0 24px;
+	transform: skew(25deg);
+	padding: 4px;
 }

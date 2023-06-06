@@ -1,12 +1,26 @@
+@font-face {
+  font-family: Apex_Regular;
+  src: url(Apex_Regular.otf);
+}
+
+@font-face {
+  font-family: Oswald;
+  src: url(Oswald.ttf);
+}
+
+
 * {
-  /* background-color: black; */
   margin: 0;
   padding: 0;
   font-size: large;
-  color: white;
-  font-family: "Bahnschrift";
+  color: #c00000;
+  font-family: Apex_Regular;
   overflow: hidden;
   cursor: default;
+}
+
+body {
+  background-color: #222;
 }
 
 .content {
@@ -20,4 +34,70 @@
   -moz-box-sizing: border-box;
   -o-box-sizing: border-box;
   box-sizing: border-box;
+}
+
+.powered-by {
+  background-color: white;
+  width: 110px;
+  padding: 0 4px;
+  float: right;
+  height: 24px;
+  margin: 0px -8px 0 0px;
+  transform: skew(25deg);
+  background: white;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.powered-by .powered-by-text {
+  width: 100px;
+  font-family: Oswald;
+  font-size: small;
+  color: red;
+  position: absolute;
+  transform: skew(-25deg);
+  /* left: -32px; */
+  z-index: 3;
+  left: 15px;
+}
+
+.gradient-border {
+  --border-width: 3px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+  font-family: Lato, sans-serif;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  color: white;
+  background: #222;
+  box-shadow: -5px 0px 20px 8px black;
+}
+
+.gradient-border::after {
+  position: absolute;
+  content: "";
+  top: calc(-1 * var(--border-width));
+  left: calc(-1 * var(--border-width));
+  width: calc(100% + var(--border-width) * 2);
+  height: calc(100% + var(--border-width) * 2);
+  background: linear-gradient(90deg, #c00000, black, #c00000);
+  background-size: 300% 300%;
+  background-position: 0% 50%;
+  animation: moveGradient 10s alternate infinite;
+  filter: brightness(0.75);
+}
+
+@keyframes moveGradient {
+  50% {
+    background-position: 50% 50%;
+  }
+
+  100% {
+    background-position: 100% 50%;
+  }
 }

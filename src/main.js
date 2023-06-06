@@ -1,22 +1,10 @@
-// TAS Match ID
-// 
-var matchId = 1601;
-// 
-// 
-// TAS URL
-// 
-var url = 'https://algs.tas.gg/api/match/';
-// 
-// 
-
 var text;
 
 async function getALGSData() {
-    console.log(url + matchId);
-    var theUrl = url + matchId;
+    var url = config['matchUrl'];
     let response = await new Promise(resolve => {
         var xmlHttp = new XMLHttpRequest();
-        xmlHttp.open("GET", theUrl, true);
+        xmlHttp.open("GET", url, true);
         xmlHttp.onload = function (e) {
             resolve(xmlHttp.response);
         };
@@ -32,26 +20,70 @@ async function getALGSData() {
 
 function processRequest(responseText) {
     text = responseText;
-    const regex = /([\w\d]+) ([0-9]+\W)/g;
-    const matches = responseText.match(regex);
-    console.log(matches);
+    titleText = responseText.split('-')[0].trim().replace(":", " |");
+    points = responseText.split('---')[1].split('----')[0];
+    game = responseText.split('----')[1].trim();
 
-    var title = document.getElementById("marquee-sibling");
-    title.innerHTML = responseText.split('-')[0] + ' ' + responseText.split('----')[1];
+    const regex = /(\S+ [0-9]+)(,|\Z| )/g;
+    const matches = points.match(regex);
+
+    var title = document.getElementById("marquee-sibling-text");
     title.style = '';
+    title.innerHTML = titleText + ' | ' + game;
+
+    $(".marquee-sibling-cover").css({
+        'width': ($(".marquee-sibling-text").width() + 56 + 'px')
+    });
 
     var contentElements = document.getElementsByClassName("marquee-content-items");
     for (var j = 0; j < contentElements.length; j++) {
         contentElements[j].innerHTML = '';
 
-        for (var i = 0; i < matches.length - 1; i++) {
+        for (var i = 0; i < matches.length; i++) {
             var match = matches[i];
             if (match[match.length - 1] == ',' || match[match.length - 1] == ' ') {
                 match = match.slice(0, -1);
             }
-            var innerDiv = document.createElement('li');
-            innerDiv.innerHTML = match;
-            contentElements[j].appendChild(innerDiv);
+            var shortName = match.split(' ')[0];
+            var score = match.split(' ')[1];
+            var team = getTeam(shortName);
+
+            var innerli = document.createElement('li');
+
+            if (config['showLogo']) {
+                var innerImg = document.createElement('img');
+                innerImg.className = 'item-img';
+                innerImg.src = team.path;
+                innerli.appendChild(innerImg);
+            }
+
+            var innerText = document.createElement('div');
+            innerText.className = 'item-text';
+            if (config['isShort']) {
+                innerText.innerHTML = match;
+            }
+            else {
+                innerText.innerHTML = team.teamName + ' ' + score;
+            }
+            if (config['showLogo']) {
+                innerText.style = 'left: 76px;';
+            }
+
+            innerli.appendChild(innerText);
+            contentElements[j].appendChild(innerli);
+            var extraWidth = innerText.offsetWidth + 56;
+            if (config['showLogo']) {
+                extraWidth = extraWidth + 48;
+            }
+            innerli.style.width = extraWidth + 'px';
+        }
+    }
+}
+
+function getTeam(shortName) {
+    for (var i = 0; i < teamData.length; i++) {
+        if (teamData[i].shortName == shortName) {
+            return teamData[i];
         }
     }
 }
