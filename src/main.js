@@ -32,7 +32,7 @@ function processRequest(responseText) {
     title.innerHTML = titleText + ' | ' + game;
 
     $(".marquee-sibling-cover").css({
-        'width': ($(".marquee-sibling-text").width() + 56 + 'px')
+        'width': ($(".marquee-sibling-text").width() + 48 + 'px')   // 48 padding
     });
 
     var contentElements = document.getElementsByClassName("marquee-content-items");
@@ -46,34 +46,36 @@ function processRequest(responseText) {
             }
             var shortName = match.split(' ')[0];
             var score = match.split(' ')[1];
-            var team = getTeam(shortName);
+
 
             var innerli = document.createElement('li');
+            if (config['showLogo'] || config['isFullName']) {
+                var team = getTeam(shortName);
+            }
 
-            if (config['showLogo']) {
+            if (team && config['showLogo']) {
                 var innerImg = document.createElement('img');
                 innerImg.className = 'item-img';
                 innerImg.src = team.path;
                 innerli.appendChild(innerImg);
             }
-
             var innerText = document.createElement('div');
             innerText.className = 'item-text';
-            if (config['isShort']) {
-                innerText.innerHTML = match;
-            }
-            else {
+            if (team && config['isFullName']) {
                 innerText.innerHTML = team.teamName + ' ' + score;
             }
-            if (config['showLogo']) {
-                innerText.style = 'left: 76px;';
+            else {
+                innerText.innerHTML = match;
+            }
+            if (team && config['showLogo']) {
+                innerText.style = 'left: 66px;';    // 40 logo width + 20 margin + 6 padding
             }
 
             innerli.appendChild(innerText);
             contentElements[j].appendChild(innerli);
-            var extraWidth = innerText.offsetWidth + 56;
-            if (config['showLogo']) {
-                extraWidth = extraWidth + 48;
+            var extraWidth = innerText.offsetWidth + 48;    // 48 padding
+            if (team && config['showLogo']) {
+                extraWidth = extraWidth + 40; // 40 logo width
             }
             innerli.style.width = extraWidth + 'px';
         }

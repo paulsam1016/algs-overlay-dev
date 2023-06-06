@@ -7,6 +7,6 @@ config = {
         https://oe.tas.gg/match/<matchId>
     */
     "matchUrl": "https://algs.tas.gg/api/match/1569",
-    "isShort": true,
-    "showLogo": false,
+    "isFullName": true,
+    "showLogo": true,
 };

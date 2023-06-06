@@ -42,7 +42,7 @@
 	color: white;
 	position: absolute;
 	transform: skew(25deg);
-	left: 30px;
+	left: 28px;
 	z-index: 3;
 }
 
@@ -91,14 +91,14 @@
 	display: inline-block;
 	position: absolute;
 	transform: skew(25deg);
-	left: 30px;
+	left: 24px;
 }
 
 .item-img {
 	display: inline-block;
 	width: 40px;
 	height: 40px;
-	margin: 0 24px;
+	margin: 0 20px;
 	transform: skew(25deg);
-	padding: 4px;
+	padding: 6px;
 }
