@@ -1,6 +1,7 @@
-ALGS Overlay made using TAS(Twitch Apex Stats), may work with other Tournaments(eg: Oversite, etc).
-**Only URLs from TAS(Twitch Apex Stats) will work!!!**
+ALGS Overlay made using TAS(Twitch Apex Stats), may work with other Tournaments(eg: Oversite, etc).<br>
+**Only URLs from TAS(Twitch Apex Stats) will work!!!**<br>
 Site: https://tournaments.tas.gg/
+>Refreshes every 10s
 
 ## Note
 When using for Tournaments other than ALGS `showFullName` and `showLogo` may not work, in such cases the Short names are used.
