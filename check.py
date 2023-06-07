@@ -1,7 +1,7 @@
 import json
 import pandas as pd
 
-with open("teamConfig.json", "r") as teamConfigFile:
+with open("./teamConfig.json", "r") as teamConfigFile:
     data = json.load(teamConfigFile)
     # print(data)
     df = pd.DataFrame(data)

@@ -17,6 +17,24 @@
                   </div>
             </div>
       </div>
+      <div id="regions" class="regions" style="visibility:hidden;">
+            <div class="region na">
+                  <div class="regions-text">NA</div>
+            </div>
+            <div class="region emea">
+                  <div class="regions-text">EMEA</div>
+            </div>
+            <div class="region apacn">
+                  <div class="regions-text">APAC N</div>
+            </div>
+            <div class="region apacs">
+                  <div class="regions-text">APAC S</div>
+            </div>
+            <div class="region sa">
+                  <div class="regions-text">SA</div>
+            </div>
+      </div>
+
       <div class="powered-by">
             <div class="powered-by-text">
                   Powered by TAS.gg
@@ -44,8 +62,16 @@
                   direction: 'left'
             }
             getALGSData().then(() => {
-                  var div = document.getElementById('body');
-                  div.style.visibility = 'visible';
+                  var body = document.getElementById('body');
+                  body.style.visibility = 'visible';
+                  var regions = document.getElementById('regions');
+                  if (config['showRegion']) {
+                        regions.style.visibility = 'visible';
+                  }
+                  else {
+                        regions.style.visibility = 'hidden';
+                  }
+
                   $('.simple-marquee-container').SimpleMarquee(options);
             });
             // const interval = setInterval(function () {

@@ -33,6 +33,18 @@ def is_same_team_in_config(teamName, shortName):
             return True
     return False
 
+def set_region(matchId):
+    if matchId >= 1562 and matchId <= 1571:
+        return 'APAC N'
+    elif matchId >= 1572 and matchId <= 1581:
+        return 'NA'
+    elif matchId >= 1582 and matchId <= 1591:
+        return 'APAC S'
+    elif matchId >= 1592 and matchId <= 1601:
+        return 'EMEA'
+    elif matchId >= 1602 and matchId <= 1611:
+        return 'SA'
+
 
 apiUrl = 'https://algs.tas.gg/api/match/<matchId>/?showBracketLink'
 startMatchId = 1562    # 1562
@@ -51,7 +63,7 @@ driver = webdriver.Firefox(options=fireFoxOptions)
 
 for matchId in range(startMatchId, endMatchId+1):
     url = apiUrl.replace('<matchId>', str(matchId))
-    # print(url)
+    print(url)
     response = requests.get(url)
     points = response.text.split('---')[1].split('----')[0]
     bracketUrl = response.text.split('Bracket: ')[1]
@@ -72,7 +84,8 @@ for matchId in range(startMatchId, endMatchId+1):
                 imageElement = teamElement.find('img')
                 teamName = imageElement.parent.find('span').text
                 shortName = matches[index][0].split(' ')[0]
-                path = 'src/images/' + str(teamId) + '.png'
+                path = './overlay/src/images/' + str(teamId) + '.png'
+                region = set_region(matchId)
                 # print(imageElement['src'])
                 # print(teamName)
                 # print(shortName)
@@ -83,6 +96,7 @@ for matchId in range(startMatchId, endMatchId+1):
                         'teamName': teamName,
                         'shortName': shortName,
                         'path': path,
+                        'region': region,
                     })
                     teamId = teamId + 1
                     # print(os.path.isfile(path))
@@ -100,5 +114,5 @@ driver.close()
 
 # print(teamConfig)
 
-with open("teamConfig.json", "w") as teamConfigFile:
+with open("./teamConfig.json", "w") as teamConfigFile:
     json.dump(teamConfig, teamConfigFile, indent=4, ensure_ascii=False, sort_keys=True)

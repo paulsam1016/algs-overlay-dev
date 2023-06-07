@@ -37,9 +37,38 @@ body {
   box-sizing: border-box;
 }
 
+.regions {
+  position: absolute;
+  padding-right: 10px;
+  left: -10px;
+  z-index: 0;
+}
+
+.region {
+  width: 64px;
+  float: left;
+  height: 24px;
+  margin: 0 -1px 0 0;
+  transform: skew(-25deg);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.region .regions-text {
+  width: 64px;
+  font-family: Oswald;
+  font-size: small;
+  color: white;
+  position: absolute;
+  transform: skew(25deg);
+  z-index: 2;
+  text-align: center;
+}
+
 .powered-by {
   background-color: white;
-  width: 110px;
+  width: 125px;
   padding: 0 4px;
   float: right;
   height: 24px;
@@ -52,7 +81,7 @@ body {
 }
 
 .powered-by .powered-by-text {
-  width: 100px;
+  width: 110px;
   font-family: Oswald;
   font-size: small;
   color: red;
@@ -101,4 +130,24 @@ body {
   100% {
     background-position: 100% 50%;
   }
+}
+
+.region.na {
+  background: #020BB6 !important;
+}
+
+.region.sa {
+  background: #697A21 !important;
+}
+
+.region.emea {
+  background: #F26430 !important;
+}
+
+.region.apacn {
+  background: #A657AE !important;
+}
+
+.region.apacs {
+  background: #CDA213 !important;
 }

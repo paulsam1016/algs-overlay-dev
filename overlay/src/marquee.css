@@ -84,7 +84,27 @@
 	background: black;
 	overflow: hidden;
 	position: relative;
-	padding-top: 2px;
+	margin: 0 4px 0 0;
+}
+
+li.na {
+	border-bottom: #020BB6 4px solid !important;
+}
+
+li.sa {
+	border-bottom: #697A21 4px solid !important;
+}
+
+li.emea {
+	border-bottom: #F26430 4px solid !important;
+}
+
+li.apacn {
+	border-bottom: #A657AE 4px solid !important;
+}
+
+li.apacs {
+	border-bottom: #CDA213 4px solid !important;
 }
 
 .item-text {
@@ -96,9 +116,9 @@
 
 .item-img {
 	display: inline-block;
-	width: 40px;
+	/* width: 40px; */
 	height: 40px;
-	margin: 0 16px;
-	transform: skew(25deg);
+	margin: 0 30px;
+	transform: skew(25deg) translate(-43%, 0%);
 	padding: 6px;
 }

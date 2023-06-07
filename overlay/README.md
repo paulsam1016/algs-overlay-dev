@@ -3,7 +3,7 @@ ALGS Overlay made using TAS(Twitch Apex Stats), may work with other Tournaments(
 Site: https://tournaments.tas.gg/
 
 ## Note
-When using for Tournaments other than ALGS `isFullName` and `showLogo` may not work, in such cases the Short names are used.
+When using for Tournaments other than ALGS `showFullName` and `showLogo` may not work, in such cases the Short names are used.
 
 ## Documentation
 - **matchUrl**<br>
@@ -11,11 +11,13 @@ When using for Tournaments other than ALGS `isFullName` and `showLogo` may not w
     Examples:<br>
     - https://algs.tas.gg/api/match/<matchId><br>
     - https://oe.tas.gg/match/<matchId>
-- **isFullName**<br>
+- **showFullName**<br>
   - false: Short names(Initials) from TAS is used for the overlay.
   - true: Uses Full Name from Battlefy.
 - **showLogo**<br>
     Shows Logo of respective teams.
+- **showRegion**<br>
+    Highlight regions of respective teams. 
 ## Usage
 1. Open `config.js` and set the `matchUrl` and other options per requirements.
 2. Open OBS and Add new **Browser Source** [Sources > Add Source > Browser].

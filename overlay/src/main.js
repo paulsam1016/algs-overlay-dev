@@ -49,7 +49,7 @@ function processRequest(responseText) {
 
 
             var innerli = document.createElement('li');
-            if (config['showLogo'] || config['isFullName']) {
+            if (config['showLogo'] || config['showFullName']) {
                 var team = getTeam(shortName);
             }
 
@@ -67,23 +67,26 @@ function processRequest(responseText) {
 
             var innerText = document.createElement('div');
             innerText.className = 'item-text';
-            if (team && config['isFullName']) {
+            if (team && config['showFullName']) {
                 innerText.innerHTML = team.teamName + ' ' + score;
             }
             else {
                 innerText.innerHTML = match;
             }
-
-            if (config['showLogo']) {
-                innerText.style = 'left: 66px;';    // 40 logo width + 20 margin + 6 padding
-            }
             innerli.appendChild(innerText);
             contentElements[j].appendChild(innerli);
             var extraWidth = innerText.offsetWidth + 48;    // 48 padding
             if (config['showLogo']) {
-                extraWidth = extraWidth + 40; // 40 logo width
+                innerText.style = 'left: 66px;';    // 64 logo width + 20 margin + 6 padding
+                extraWidth = extraWidth + 40;       // 40 logo width
             }
             innerli.style.width = extraWidth + 'px';
+            if (team && config['showRegion']) {
+                innerli.className = team.region.replace(' ', '').toLowerCase();
+            }
+            else {
+                innerli.style = innerli.style.cssText + 'padding-top: 2px;';
+            }
         }
     }
 }
