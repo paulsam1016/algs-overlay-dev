@@ -35,7 +35,7 @@
             </div>
       </div>
 
-      <div class="powered-by">
+      <div id="powered-by" class="powered-by" style="visibility:hidden;">
             <div class="powered-by-text">
                   Powered by TAS.gg
             </div>
@@ -65,20 +65,30 @@
                   var body = document.getElementById('body');
                   body.style.visibility = 'visible';
                   var regions = document.getElementById('regions');
+                  var poweredby = document.getElementById('powered-by');
                   if (config['showRegion']) {
                         regions.style.visibility = 'visible';
                   }
                   else {
                         regions.style.visibility = 'hidden';
                   }
-
+                  if (config['showPoweredby']) {
+                        poweredby.style.visibility = 'visible';
+                  }
+                  else {
+                        poweredby.style.visibility = 'hidden';
+                  }
                   $('.simple-marquee-container').SimpleMarquee(options);
             });
-            // const interval = setInterval(function () {
-            //       getALGSData().then(() => {
-            //             $('.simple-marquee-container').SimpleMarquee(options);
-            //       });
-            // }, 10000);
-            // $('.simple-marquee-container').SimpleMarquee();
+            var refreshInterval = config['refreshInterval'];
+            if (refreshInterval < 5000 && refreshInterval > 60000)
+            {
+                  refreshInterval = 10000;
+            }
+            const interval = setInterval(function () {
+                  getALGSData().then(() => {
+                        $('.simple-marquee-container').SimpleMarquee(options);
+                  });
+            }, refreshInterval);
       });
 </script>

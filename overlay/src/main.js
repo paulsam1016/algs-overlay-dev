@@ -19,6 +19,7 @@ async function getALGSData() {
 };
 
 function processRequest(responseText) {
+    var character_width = 8.7;
     text = responseText;
     titleText = responseText.split('-')[0].trim().replace(":", " |");
     points = responseText.split('---')[1].split('----')[0];
@@ -32,7 +33,7 @@ function processRequest(responseText) {
     title.innerHTML = titleText + ' | ' + game;
 
     $(".marquee-sibling-cover").css({
-        'width': ($(".marquee-sibling-text").width() + 48 + 'px')   // 48 padding
+        'width': title.innerHTML.length * character_width + 48 + 'px'   // 48 padding
     });
 
     var contentElements = document.getElementsByClassName("marquee-content-items");
@@ -75,7 +76,7 @@ function processRequest(responseText) {
             }
             innerli.appendChild(innerText);
             contentElements[j].appendChild(innerli);
-            var extraWidth = innerText.offsetWidth + 48;    // 48 padding
+            var extraWidth = innerText.innerHTML.length * character_width + 48;    // 48 padding
             if (config['showLogo']) {
                 innerText.style = 'left: 66px;';    // 64 logo width + 20 margin + 6 padding
                 extraWidth = extraWidth + 40;       // 40 logo width

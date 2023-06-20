@@ -1,7 +1,6 @@
 ALGS Overlay made using TAS(Twitch Apex Stats), may work with other Tournaments(eg: Oversite, etc).<br>
 **Only URLs from TAS(Twitch Apex Stats) will work!!!**<br>
 Site: https://tournaments.tas.gg/
->Refreshes every 10s
 
 ## Note
 When using for Tournaments other than ALGS `showFullName` and `showLogo` may not work, in such cases the Short names are used.
@@ -18,9 +17,11 @@ When using for Tournaments other than ALGS `showFullName` and `showLogo` may not
 - **showLogo**<br>
     Shows Logo of respective teams.
 - **showRegion**<br>
-    Highlight regions of respective teams. 
-## Usage
-1. Open `config.js` and set the `matchUrl` and other options per requirements.
-2. Open OBS and Add new **Browser Source** [Sources > Add Source > Browser].
-3. In Browser Properties use Local File option add the overlay file `overlay.html`.
-4. Also set `height` and `width` as your display resolution
+    Highlight regions of respective teams.
+- **showPoweredby**<br>
+    Shows `Powered by TAS.gg` as a footer.
+- **refreshInterval**<br>
+    Refresh Interval in milliseconds
+    - Default: 10s [10000ms]
+    - Minimum: 5s [5000ms]
+    - Maximum: 60s [60000ms]
