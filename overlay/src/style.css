@@ -70,14 +70,15 @@ body {
   background-color: white;
   width: 125px;
   padding: 0 4px;
-  float: right;
+  float: left;
   height: 24px;
   margin: 0px -8px 0 0px;
-  transform: skew(25deg);
+  transform: skew(-25deg);
   background: white;
   overflow: hidden;
   position: relative;
   z-index: 2;
+  left: -8px;
 }
 
 .powered-by .powered-by-text {
@@ -86,8 +87,7 @@ body {
   font-size: small;
   color: red;
   position: absolute;
-  transform: skew(-25deg);
-  /* left: -32px; */
+  transform: skew(25deg);
   z-index: 3;
   left: 15px;
 }

@@ -87,6 +87,22 @@
             }
             const interval = setInterval(function () {
                   getALGSData().then(() => {
+                        var body = document.getElementById('body');
+                        body.style.visibility = 'visible';
+                        var regions = document.getElementById('regions');
+                        var poweredby = document.getElementById('powered-by');
+                        if (config['showRegion']) {
+                              regions.style.visibility = 'visible';
+                        }
+                        else {
+                              regions.style.visibility = 'hidden';
+                        }
+                        if (config['showPoweredby']) {
+                              poweredby.style.visibility = 'visible';
+                        }
+                        else {
+                              poweredby.style.visibility = 'hidden';
+                        }
                         $('.simple-marquee-container').SimpleMarquee(options);
                   });
             }, refreshInterval);

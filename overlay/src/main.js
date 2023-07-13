@@ -36,57 +36,63 @@ function processRequest(responseText) {
         'width': title.innerHTML.length * character_width + 48 + 'px'   // 48 padding
     });
 
-    var contentElements = document.getElementsByClassName("marquee-content-items");
-    for (var j = 0; j < contentElements.length; j++) {
-        contentElements[j].innerHTML = '';
+    const contentElements = document.querySelectorAll('.marquee-content-items');
+    if (!matches) {
+        contentElements.forEach(contentElement => {
+            contentElement.className = "marquee-content-items no-items";
+        });
+    }
+    if (matches) {
+        for (var j = 0; j < contentElements.length; j++) {
+            contentElements[j].innerHTML = '';
+            for (var i = 0; i < matches.length; i++) {
+                var match = matches[i];
+                if (match[match.length - 1] == ',' || match[match.length - 1] == ' ') {
+                    match = match.slice(0, -1);
+                }
+                var shortName = match.split(' ')[0];
+                var score = match.split(' ')[1];
 
-        for (var i = 0; i < matches.length; i++) {
-            var match = matches[i];
-            if (match[match.length - 1] == ',' || match[match.length - 1] == ' ') {
-                match = match.slice(0, -1);
-            }
-            var shortName = match.split(' ')[0];
-            var score = match.split(' ')[1];
 
+                var innerli = document.createElement('li');
+                if (config['showLogo'] || config['showFullName']) {
+                    var team = getTeam(shortName);
+                }
 
-            var innerli = document.createElement('li');
-            if (config['showLogo'] || config['showFullName']) {
-                var team = getTeam(shortName);
-            }
+                if (config['showLogo']) {
+                    var innerImg = document.createElement('img');
+                    innerImg.className = 'item-img';
+                    if (team) {
+                        innerImg.src = team.path;
+                    }
+                    else {
+                        innerImg.src = "src/images/0.png"
+                    }
+                    innerli.appendChild(innerImg);
+                }
 
-            if (config['showLogo']) {
-                var innerImg = document.createElement('img');
-                innerImg.className = 'item-img';
-                if (team) {
-                    innerImg.src = team.path;
+                var innerText = document.createElement('div');
+                innerText.className = 'item-text';
+                if (team && config['showFullName']) {
+                    innerText.innerHTML = team.teamName + ' ' + score;
                 }
                 else {
-                    innerImg.src = "src/images/0.png"
+                    innerText.innerHTML = match;
                 }
-                innerli.appendChild(innerImg);
-            }
-
-            var innerText = document.createElement('div');
-            innerText.className = 'item-text';
-            if (team && config['showFullName']) {
-                innerText.innerHTML = team.teamName + ' ' + score;
-            }
-            else {
-                innerText.innerHTML = match;
-            }
-            innerli.appendChild(innerText);
-            contentElements[j].appendChild(innerli);
-            var extraWidth = innerText.innerHTML.length * character_width + 48;    // 48 padding
-            if (config['showLogo']) {
-                innerText.style = 'left: 66px;';    // 64 logo width + 20 margin + 6 padding
-                extraWidth = extraWidth + 40;       // 40 logo width
-            }
-            innerli.style.width = extraWidth + 'px';
-            if (team && config['showRegion']) {
-                innerli.className = team.region.replace(' ', '').toLowerCase();
-            }
-            else {
-                innerli.style = innerli.style.cssText + 'padding-top: 2px;';
+                innerli.appendChild(innerText);
+                contentElements[j].appendChild(innerli);
+                var extraWidth = innerText.innerHTML.length * character_width + 48;    // 48 padding
+                if (config['showLogo']) {
+                    innerText.style = 'left: 66px;';    // 64 logo width + 20 margin + 6 padding
+                    extraWidth = extraWidth + 40;       // 40 logo width
+                }
+                innerli.style.width = extraWidth + 'px';
+                if (team && config['showRegion']) {
+                    innerli.className = team.region.replace(' ', '').toLowerCase();
+                }
+                else {
+                    innerli.style = innerli.style.cssText + 'padding-top: 2px;';
+                }
             }
         }
     }
